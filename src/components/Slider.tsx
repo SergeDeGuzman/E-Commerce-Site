@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const slides = [
   {
@@ -32,6 +32,14 @@ const slides = [
 ];
 const Slider = () => {
   const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="h-[calc(100vh-80px)] overflow-hidden">
