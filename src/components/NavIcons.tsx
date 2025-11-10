@@ -52,7 +52,9 @@ const NavIcons = () => {
           className="cursor-pointer"
           onClick={() => setIsCartOpen((prev) => !prev)}
         />
-        <div className="absolute -top-4 -right-4 w-6 h-6 bg-serge">2</div>
+        <div className="absolute flex items-center justify-center rounded-full text-white text-sm  -top-4 -right-4 w-6 h-6 bg-serge">
+          2
+        </div>
       </div>
       {isCartOpen && <CartModal />}
     </div>
