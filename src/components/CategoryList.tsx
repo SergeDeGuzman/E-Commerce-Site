@@ -6,6 +6,7 @@ const CategoryList = async () => {
   const wixClient = await wixClientServer();
 
   const cats = await wixClient.products.queryProducts().find();
+  // const cats = await wixClient.collections.queryCollections().find();
 
   return (
     <div className="px-4 overflow-x-scroll scrollbar-hide">
