@@ -31,7 +31,7 @@ const HomePage = async () => {
         <Suspense fallback={'loading'}>
           <ProductList
             categoryId={process.env.FEATURED_PRODUCTS_CATEGORY_ID!}
-            limit={4}
+            limit={20}
           ></ProductList>
         </Suspense>
       </div>
@@ -40,7 +40,9 @@ const HomePage = async () => {
           Categories
         </h1>
         <Suspense fallback={'loading'}>
-          <CategoryList></CategoryList>
+          <CategoryList
+            categoryId={process.env.ALL_CATEGORY_ID!}
+          ></CategoryList>
         </Suspense>
       </div>
       <div className="mt-24 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">

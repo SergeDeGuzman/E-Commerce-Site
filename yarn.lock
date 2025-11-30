@@ -577,6 +577,14 @@
     "@wix/sdk-runtime" "^1.0.0"
     "@wix/sdk-types" "^1.13.35"
 
+"@wix/auto_sdk_categories_categories@1.0.81":
+  version "1.0.81"
+  resolved "https://registry.yarnpkg.com/@wix/auto_sdk_categories_categories/-/auto_sdk_categories_categories-1.0.81.tgz#2bfb581c2ab2c7f1d49a9692c6bf87b734804401"
+  integrity sha512-3ZNKyW+7ttaprYcJKGTVTlCYq+kgKSH3NwhPyeOiiAnLWzSRfn18ohl+8VzSK7j5UkKYgHajjSjh795xnKaDEQ==
+  dependencies:
+    "@wix/sdk-runtime" "^1.0.0"
+    "@wix/sdk-types" "^1.13.35"
+
 "@wix/auto_sdk_categories_categories@^1.0.62":
   version "1.0.78"
   resolved "https://registry.yarnpkg.com/@wix/auto_sdk_categories_categories/-/auto_sdk_categories_categories-1.0.78.tgz#79212b2d6d11751631b782a746f83ff7057ebd04"
@@ -1296,6 +1304,13 @@
   dependencies:
     "@wix/sdk-runtime" "^1.0.0"
     "@wix/sdk-types" "^1.13.35"
+
+"@wix/categories@^1.0.159":
+  version "1.0.159"
+  resolved "https://registry.yarnpkg.com/@wix/categories/-/categories-1.0.159.tgz#bf5a98e1e4395068d82ee6a0901f8d23ceaabdb8"
+  integrity sha512-JOpJag3JdiKGonayszbavUKQzpVW1OJJgWlF425RtC3gZ4SDB2XxnbOLoilWWqwPIuigD5anBMh2BYHBpFPvTQ==
+  dependencies:
+    "@wix/auto_sdk_categories_categories" "1.0.81"
 
 "@wix/ecom@^1.0.1461", "@wix/ecom@^1.0.540":
   version "1.0.1465"
@@ -4524,6 +4539,11 @@ which@^2.0.1:
   integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   dependencies:
     isexe "^2.0.0"
+
+wix-data@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/wix-data/-/wix-data-0.0.1-security.tgz#20b60c90baa3a1799577b4d73afdec5a17e1593a"
+  integrity sha512-PFuHzqcwOhLyJtSEnnjis4D/9Rr6Ot1efT/AjwqIeVVEo619/lmz0EnJaq6/oNTHwdnYtPFsjIskm8sC/BqBQQ==
 
 word-wrap@^1.2.5:
   version "1.2.5"
