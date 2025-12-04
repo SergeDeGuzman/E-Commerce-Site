@@ -21,6 +21,9 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
   }
 
   const product = products.items[0];
+
+  // console.log(product.variants);
+  // console.log(product.productOptions);
   return (
     <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-16">
       {/* IMG */}
@@ -46,8 +49,19 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
           </div>
         )}
         <div className="h-[2px] bg-gray-100" /> {/*LINE*/}
-        <CustomizeProducts></CustomizeProducts>
-        <Add></Add>
+        {product.variants && product.productOptions ? (
+          <CustomizeProducts
+            productId={product._id!}
+            variants={product.variants}
+            productOptions={product.productOptions}
+          ></CustomizeProducts>
+        ) : (
+          <Add
+            productId={product._id!}
+            variantId=""
+            stockNumber={product.stock?.quantity || 0}
+          ></Add>
+        )}
         <div className="h-[2px] bg-gray-100" /> {/*LINE*/}
         {product.additionalInfoSections?.map((section: any) => (
           <div className="text-sm" key={section.title}>
