@@ -29,6 +29,7 @@ const CustomizeProducts = ({
     });
     setSelectedVariant(variant);
   }, [selectedOptions, variants]);
+
   const handleOptionSelect = (optionType: string, choice: string) => {
     setSelectedOptions((prev) => ({ ...prev, [optionType]: choice }));
   };
