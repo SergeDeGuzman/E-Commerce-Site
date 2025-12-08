@@ -3,8 +3,9 @@ import { products } from '@wix/stores';
 import Image from 'next/image';
 import Link from 'next/link';
 import DOMPurify from 'isomorphic-dompurify';
+import Pagination from './Pagination';
 
-const PRODUCT_PER_PAGE = 20;
+const PRODUCT_PER_PAGE = 10;
 
 const ProductList = async ({
   categoryId,
@@ -21,14 +22,59 @@ const ProductList = async ({
     .queryProducts()
     .startsWith('name', searchParams?.name || '')
     // .eq('collectionIds', categoryId)
+    // .hasSome('productType', [searchParams?.type || 'physical', 'digital'])
+    // .gt('priceData.price', searchParams?.min || 0)
+    // .lt('priceData.price', searchParams?.max || 999999)
     .limit(limit || PRODUCT_PER_PAGE)
+    .skip(
+      searchParams?.page
+        ? parseInt(searchParams.page) * (limit || PRODUCT_PER_PAGE)
+        : 0
+    )
     .find();
 
   // console.log(res.items[0]);
 
+  //EQUIVALENT TO THE WIX QUERY BUILDER
   const productsToDisplay = res.items.filter((product: any) => {
-    return product.collectionIds?.includes(categoryId);
+    const allowedTypes = searchParams?.type
+      ? [searchParams.type]
+      : ['physical', 'digital'];
+
+    const minPrice = Number(searchParams?.min) || 1; //not 0 to hide the product as category
+    const maxPrice = Number(searchParams?.max) || 999999;
+
+    const price = product.priceData?.price ?? 0;
+
+    return (
+      product.collectionIds?.includes(categoryId) &&
+      allowedTypes.includes(product.productType) &&
+      price >= minPrice &&
+      price <= maxPrice
+    );
   });
+
+  //EQUIVALENT TO .ascending and .descending wix query builder
+  if (searchParams?.sort) {
+    const [sortType] = searchParams.sort.split(' ');
+
+    productsToDisplay.sort((a: any, b: any) => {
+      const priceA = a.priceData?.price ?? 0;
+      const priceB = b.priceData?.price ?? 0;
+
+      return sortType === 'asc' ? priceA - priceB : priceB - priceA;
+    });
+  }
+
+  // console.log(productsToDisplay);
+
+  // const page = parseInt(searchParams?.page || '0');
+  // const limitPerPage = limit || PRODUCT_PER_PAGE;
+
+  // const paginatedProducts = productsToDisplay.slice(
+  //   page * limitPerPage,
+  //   page * limitPerPage + limitPerPage
+  // );
   return (
     <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
       {productsToDisplay.map((product: products.Product) => (
@@ -76,6 +122,11 @@ const ProductList = async ({
           </button>
         </Link>
       ))}
+      <Pagination
+        currentPage={res.currentPage || 0}
+        hasPrev={res.hasPrev()}
+        hasNext={res.hasNext()}
+      ></Pagination>
     </div>
   );
 };
